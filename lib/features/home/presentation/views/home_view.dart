@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snapbook/core/themes/bloc/theme_bloc.dart';
 import 'package:snapbook/core/themes/theme_mode/dark_mode.dart';
 import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
-import 'package:snapbook/services/shared_pref.dart';
+import 'package:snapbook/core/services/shared_pref.dart';
 
 class HomeView extends StatefulWidget {
+  static route() => MaterialPageRoute(builder: (context) => const HomeView());
   const HomeView({super.key});
 
   @override
