@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snapbook/core/themes/bloc/theme_bloc.dart';
 import 'package:snapbook/core/themes/theme_mode/dark_mode.dart';
 import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
-import 'package:snapbook/features/home/presentation/views/home_view.dart';
-import 'package:snapbook/services/shared_pref.dart';
+import 'package:snapbook/features/auth/presentation/views/login_view.dart';
+import 'package:snapbook/core/services/shared_pref.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
               title: 'S N A P B O O K',
               theme: state.themeData,
               darkTheme: darkMode,
-              home: const HomeView(),
+              home: const LoginView(),
             );
           }
           return const SizedBox();
