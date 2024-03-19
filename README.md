@@ -1,4 +1,4 @@
-# snapbook
+# snapboook
 
 Snapboook is social app with minimal UI.
 
