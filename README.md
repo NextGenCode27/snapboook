@@ -1,10 +1,16 @@
 # snapbook
 
-A new Flutter project.
+Snapboook is social app with minimal UI.
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+
+We used bloc clean architecture in this project.
+We are not foccussing on ui thats why we are using very minimal ui design.
+Basically we are trying to create this app very smooth with flutter bloc state management.
+
+
 
 A few resources to get you started if this is your first Flutter project:
 
