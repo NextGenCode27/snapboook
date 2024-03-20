@@ -11,6 +11,7 @@ class ForgotView extends StatefulWidget {
 }
 
 class _ForgotViewState extends State<ForgotView> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
 
   @override
@@ -58,18 +59,23 @@ class _ForgotViewState extends State<ForgotView> {
                 ),
 
                 //Email  Input
-                AuthTextField(
-                  controller: emailController,
-                  hintText: 'EMAIL',
-                  obScureText: false,
-                  keyboardType: TextInputType.emailAddress,
+                Form(
+                  key: _formKey,
+                  child: AuthTextField(
+                    controller: emailController,
+                    hintText: 'EMAIL',
+                    obScureText: false,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                 ),
 
                 //AuthButton
                 AuthButton(
                   lable: 'Send Email',
                   icon: Icons.login,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {}
+                  },
                 ),
 
                 //Bck to Login
