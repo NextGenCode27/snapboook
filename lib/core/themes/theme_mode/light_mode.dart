@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
+  appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade300),
   fontFamily: GoogleFonts.poppins().fontFamily,
   colorScheme: ColorScheme.light(
     background: Colors.grey.shade300,

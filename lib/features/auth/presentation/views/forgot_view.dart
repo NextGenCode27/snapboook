@@ -46,7 +46,7 @@ class _ForgotViewState extends State<ForgotView> {
                     ),
                     //Message Auth Slogan
                     Text(
-                      'FORGOT SNAPBOOK PASSWORD',
+                      'FORGOT SNAPBOOOK PASSWORD',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.inversePrimary,
                         fontSize: 14,

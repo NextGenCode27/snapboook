@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snapbook/bloc_observer.dart';
 import 'package:snapbook/core/themes/bloc/theme_bloc.dart';
 import 'package:snapbook/core/themes/theme_mode/dark_mode.dart';
 import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
@@ -7,10 +8,11 @@ import 'package:snapbook/features/auth/presentation/views/login_view.dart';
 import 'package:snapbook/core/services/shared_pref.dart';
 
 void main() async {
+  Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  final isDarkMode = await SharedPref().getBool('isDarkMode');
+  final isDarkMode = await SharedPref().getBool('isDarkMode') ?? false;
   runApp(MyApp(
-    isDarkMode: isDarkMode!,
+    isDarkMode: isDarkMode,
   ));
 }
 
