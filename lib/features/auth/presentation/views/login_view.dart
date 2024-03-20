@@ -14,6 +14,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -62,41 +63,44 @@ class _LoginViewState extends State<LoginView> {
                 ),
 
                 //Email And Password Input
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AuthTextField(
-                      controller: emailController,
-                      hintText: 'EMAIL',
-                      obScureText: false,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    AuthTextField(
-                      controller: passwordController,
-                      hintText: 'PASSWORD',
-                      obScureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(ForgotView.route());
-                      },
-                      child: Text(
-                        'Forgot?',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
-                          fontSize: 14,
-                          letterSpacing: 2.0,
-                        ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AuthTextField(
+                        controller: emailController,
+                        hintText: 'EMAIL',
+                        obScureText: false,
+                        keyboardType: TextInputType.emailAddress,
                       ),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      AuthTextField(
+                        controller: passwordController,
+                        hintText: 'PASSWORD',
+                        obScureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(ForgotView.route());
+                        },
+                        child: Text(
+                          'Forgot?',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontSize: 14,
+                            letterSpacing: 2.0,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
 
                 //AuthButton
@@ -104,8 +108,10 @@ class _LoginViewState extends State<LoginView> {
                   lable: 'Login',
                   icon: Icons.login,
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushAndRemoveUntil(HomeView.route(), (route) => false);
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          HomeView.route(), (route) => false);
+                    }
                   },
                 ),
                 //Not a member? sing up

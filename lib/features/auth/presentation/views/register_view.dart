@@ -13,6 +13,7 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -65,42 +66,45 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
 
                 //Email And Password Input
-                Column(
-                  children: [
-                    AuthTextField(
-                      controller: usernameController,
-                      hintText: 'USERNAME',
-                      obScureText: false,
-                      keyboardType: TextInputType.name,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    AuthTextField(
-                      controller: emailController,
-                      hintText: 'EMAIL',
-                      obScureText: false,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    AuthTextField(
-                      controller: phoneController,
-                      hintText: 'PHONE',
-                      obScureText: false,
-                      keyboardType: TextInputType.phone,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    AuthTextField(
-                      controller: passwordController,
-                      hintText: 'PASSWORD',
-                      obScureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
-                  ],
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      AuthTextField(
+                        controller: usernameController,
+                        hintText: 'USERNAME',
+                        obScureText: false,
+                        keyboardType: TextInputType.name,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      AuthTextField(
+                        controller: emailController,
+                        hintText: 'EMAIL',
+                        obScureText: false,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      AuthTextField(
+                        controller: phoneController,
+                        hintText: 'PHONE',
+                        obScureText: false,
+                        keyboardType: TextInputType.phone,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      AuthTextField(
+                        controller: passwordController,
+                        hintText: 'PASSWORD',
+                        obScureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                      ),
+                    ],
+                  ),
                 ),
 
                 //AuthButton
@@ -108,8 +112,10 @@ class _RegisterViewState extends State<RegisterView> {
                   lable: 'Register',
                   icon: Icons.login,
                   onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        ProfilePictureUploadView.route(), (route) => false);
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          ProfilePictureUploadView.route(), (route) => false);
+                    }
                   },
                 ),
                 //Not a member? sing up

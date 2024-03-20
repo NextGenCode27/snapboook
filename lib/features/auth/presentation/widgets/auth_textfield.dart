@@ -15,7 +15,7 @@ class AuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       style: TextStyle(
@@ -41,8 +41,27 @@ class AuthTextField extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
+          ),
+        ),
       ),
+      cursorColor: Theme.of(context).colorScheme.error,
       obscureText: obScureText,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return '$hintText can not be empty!';
+        }
+        return null;
+      },
     );
   }
 }

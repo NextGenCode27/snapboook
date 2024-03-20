@@ -10,5 +10,6 @@ ThemeData lightMode = ThemeData(
     secondary: Colors.grey.shade100,
     tertiary: Colors.white,
     inversePrimary: Colors.grey.shade700,
+    error: const Color.fromARGB(214, 219, 96, 88),
   ),
 );
