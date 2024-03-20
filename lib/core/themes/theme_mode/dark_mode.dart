@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData darkMode = ThemeData(
+  appBarTheme:
+      const AppBarTheme(backgroundColor: Color.fromARGB(255, 20, 20, 20)),
   fontFamily: GoogleFonts.poppins().fontFamily,
   colorScheme: ColorScheme.dark(
     background: const Color.fromARGB(255, 20, 20, 20),

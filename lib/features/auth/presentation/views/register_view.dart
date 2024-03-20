@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapbook/features/auth/presentation/views/profile_picture_upload_view.dart';
 import 'package:snapbook/features/auth/presentation/widgets/auth_button.dart';
 import 'package:snapbook/features/auth/presentation/widgets/auth_textfield.dart';
 
@@ -106,7 +107,10 @@ class _RegisterViewState extends State<RegisterView> {
                 AuthButton(
                   lable: 'Register',
                   icon: Icons.login,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        ProfilePictureUploadView.route(), (route) => false);
+                  },
                 ),
                 //Not a member? sing up
                 Row(
