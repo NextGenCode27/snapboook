@@ -9,6 +9,11 @@ import 'package:snapbook/features/auth/domain/usecase/current_user_usecase.dart'
 import 'package:snapbook/features/auth/domain/usecase/login_usecase.dart';
 import 'package:snapbook/features/auth/domain/usecase/register_usecase.dart';
 import 'package:snapbook/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:snapbook/features/home/data/data_source/remote/home_remote_datasource.dart';
+import 'package:snapbook/features/home/data/repository/home_repository_impl.dart';
+import 'package:snapbook/features/home/domain/repository/home_repository.dart';
+import 'package:snapbook/features/home/domain/usecase/home_user_logout_usecase.dart';
+import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 GetIt serviceLocator = GetIt.instance;
@@ -16,6 +21,7 @@ GetIt serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   _intiTheme();
   _initAuth();
+  _initHome();
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supabaseAnnonKey,
@@ -54,6 +60,24 @@ void _initAuth() {
         loginUsecase: serviceLocator(),
         registerUsecase: serviceLocator(),
         currentUserUsecase: serviceLocator(),
+      ),
+    );
+}
+
+void _initHome() {
+  serviceLocator
+    ..registerFactory<HomeRemoteDatasource>(
+      () => HomeRemoteDatasourceImpl(serviceLocator()),
+    )
+    ..registerFactory<HomeRepository>(
+      () => HomeRepositoryImpl(serviceLocator()),
+    )
+    ..registerFactory<HomeUserLogoutUsecase>(
+      () => HomeUserLogoutUsecase(serviceLocator()),
+    )
+    ..registerLazySingleton<HomeBloc>(
+      () => HomeBloc(
+        homeUserLogoutUsecase: serviceLocator(),
       ),
     );
 }
