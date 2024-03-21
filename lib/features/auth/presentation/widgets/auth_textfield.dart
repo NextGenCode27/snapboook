@@ -54,7 +54,7 @@ class AuthTextField extends StatelessWidget {
           ),
         ),
       ),
-      cursorColor: Theme.of(context).colorScheme.error,
+      cursorColor: Theme.of(context).colorScheme.primary,
       obscureText: obScureText,
       validator: (value) {
         if (value!.isEmpty) {
