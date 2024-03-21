@@ -10,7 +10,7 @@ final class HomeCurrentIndexEvent extends HomeEvent {
   final int currentIndex;
   HomeCurrentIndexEvent({required this.currentIndex});
   @override
-  String toString() => 'Home User Log Out Event';
+  String toString() => 'Home Current Index Event';
 }
 
 final class HomeUserLogOutEvent extends HomeEvent {

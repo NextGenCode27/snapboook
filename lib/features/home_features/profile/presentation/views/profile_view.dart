@@ -38,8 +38,14 @@ class ProfileView extends StatelessWidget {
                 return IconButton(
                   onPressed: toggle,
                   icon: state.themeData == lightMode
-                      ? const Icon(Icons.dark_mode)
-                      : const Icon(Icons.light_mode),
+                      ? Icon(
+                          Icons.dark_mode,
+                          color: Theme.of(context).colorScheme.secondary,
+                        )
+                      : Icon(
+                          Icons.light_mode,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                 );
               }
               return const SizedBox();
@@ -49,7 +55,8 @@ class ProfileView extends StatelessWidget {
             onPressed: () {
               context.read<HomeBloc>().add(HomeUserLogOutEvent());
             },
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout,
+                color: Theme.of(context).colorScheme.secondary),
           ),
         ],
       ),
@@ -59,7 +66,7 @@ class ProfileView extends StatelessWidget {
           color: Theme.of(context).colorScheme.error,
           image: const DecorationImage(
             image: NetworkImage(
-              'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+              'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1588&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             ),
             fit: BoxFit.cover,
           ),

@@ -34,6 +34,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
             .from('profiles')
             .select()
             .eq('id', currentSession!.user.id);
+
         return UserModel.fromJson(currentUserdata.first)
             .copyWith(email: currentSession!.user.email);
       }
