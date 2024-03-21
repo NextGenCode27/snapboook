@@ -7,6 +7,8 @@ sealed class HomeState {
 }
 
 final class HomeInitial extends HomeState {
+  final int currentIndex;
+  HomeInitial({required this.currentIndex});
   @override
   String toString() => 'Home Initial';
 }
@@ -14,6 +16,13 @@ final class HomeInitial extends HomeState {
 final class HomeLoading extends HomeState {
   @override
   String toString() => 'Home Loading';
+}
+
+final class HomeSuccess extends HomeState {
+  final int currentIndex;
+  HomeSuccess({required this.currentIndex});
+  @override
+  String toString() => 'Home Success';
 }
 
 final class HomeLogOut extends HomeState {

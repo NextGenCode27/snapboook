@@ -12,9 +12,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeUserLogoutUsecase _homeUserLogoutUsecase;
   HomeBloc({required HomeUserLogoutUsecase homeUserLogoutUsecase})
       : _homeUserLogoutUsecase = homeUserLogoutUsecase,
-        super(HomeInitial()) {
+        super(HomeInitial(currentIndex: 0)) {
     on<HomeEvent>(_onMapHomeEventToState);
-    on<HomeUserLogOutEvent>(_onHomeUserLogOutEventToState);
+    on<HomeUserLogOutEvent>(_onMapHomeUserLogOutEventToState);
+    on<HomeCurrentIndexEvent>(_onMapHomeCurrentIndexEndex);
   }
 
   FutureOr<void> _onMapHomeEventToState(
@@ -22,7 +23,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoading());
   }
 
-  FutureOr<void> _onHomeUserLogOutEventToState(
+  FutureOr<void> _onMapHomeCurrentIndexEndex(
+      HomeCurrentIndexEvent event, Emitter<HomeState> emit) async {
+    emit(HomeSuccess(currentIndex: event.currentIndex));
+  }
+
+  FutureOr<void> _onMapHomeUserLogOutEventToState(
       HomeUserLogOutEvent event, Emitter<HomeState> emit) async {
     final res = await _homeUserLogoutUsecase.call(NoParams());
     res.fold(
