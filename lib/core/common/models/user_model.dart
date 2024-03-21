@@ -7,30 +7,27 @@ class UserModel extends UserEntity {
     required super.email,
     required super.phone,
     required super.photoUrl,
-    required super.photoId,
-    required super.updatedAt,
+    // required super.photoId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'] ?? '',
-      userName: map['userName'] ?? '',
+      userName: map['name'] ?? '',
       email: map['email'] ?? '',
       phone: map['phone'] ?? '',
-      photoUrl: map['photoUrl'] ?? '',
-      photoId: map['photoId'] ?? '',
-      updatedAt: map['updatedAt'] ?? '',
+      photoUrl: map['photo_url'] ?? '',
+      // photoId: map['photo_id'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'userName': userName,
+        'name': userName,
         'email': email,
         'phone': phone,
-        'photoUrl': photoUrl,
-        'photoId': photoId,
-        'updatedAt': updatedAt,
+        'photo_url': photoUrl,
+        // 'photo_id': photoId,
       };
 
   UserModel copyWith({
@@ -39,8 +36,8 @@ class UserModel extends UserEntity {
     String? email,
     String? phone,
     String? photoUrl,
-    String? photoId,
-    DateTime? updatedAt,
+    // String? photoId,
+    // DateTime? updatedAt,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -48,8 +45,7 @@ class UserModel extends UserEntity {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       photoUrl: photoUrl ?? this.photoUrl,
-      photoId: photoId ?? this.photoId,
-      updatedAt: updatedAt ?? this.updatedAt,
+      // photoId: photoId ?? this.photoId,
     );
   }
 }

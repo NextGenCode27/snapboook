@@ -4,6 +4,7 @@ import 'package:snapbook/bloc_observer.dart';
 import 'package:snapbook/core/themes/bloc/theme_bloc.dart';
 import 'package:snapbook/core/themes/theme_mode/dark_mode.dart';
 import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
+import 'package:snapbook/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:snapbook/features/auth/presentation/views/login_view.dart';
 import 'package:snapbook/core/services/shared_pref.dart';
 import 'package:snapbook/init_dependencies.dart';
@@ -11,7 +12,7 @@ import 'package:snapbook/init_dependencies.dart';
 void main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  initDependencies();
+  await initDependencies();
   final isDarkMode = await SharedPref().getBool('isDarkMode') ?? false;
   runApp(MyApp(
     isDarkMode: isDarkMode,
@@ -39,9 +40,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => serviceLocator<ThemeBloc>(),
-        ),
+        BlocProvider(create: (context) => serviceLocator<ThemeBloc>()),
+        BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
       ],
       child: BlocConsumer<ThemeBloc, ThemeState>(
         listener: (context, state) {},

@@ -1,12 +1,13 @@
+import 'package:snapbook/core/common/models/user_model.dart';
 import 'package:snapbook/core/error/exception.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDatasource {
-  Future<String> signIn({
+  Future<UserModel> signIn({
     required String email,
     required String password,
   });
-  Future<String> signUp({
+  Future<UserModel> signUp({
     required String userName,
     required String email,
     required String phone,
@@ -19,7 +20,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   final SupabaseClient supabaseClient;
   AuthRemoteDatasourceImpl(this.supabaseClient);
   @override
-  Future<String> signIn({
+  Future<UserModel> signIn({
     required String email,
     required String password,
   }) async {
@@ -28,10 +29,14 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         email: email,
         password: password,
       );
+      final userData = await supabaseClient
+          .from('profiles')
+          .select()
+          .eq('id', response.user!.id);
       if (response.user == null) {
         throw const ServerException(message: 'User is null');
       }
-      return response.user!.id;
+      return UserModel.fromJson(userData.first);
     } catch (e) {
       throw ServerException(
         message: e.toString(),
@@ -40,7 +45,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   }
 
   @override
-  Future<String> signUp({
+  Future<UserModel> signUp({
     required String userName,
     required String email,
     required String phone,
@@ -52,15 +57,19 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         email: email,
         password: password,
         data: {
-          'userName': userName,
+          'name': userName,
           'phone': phone,
-          'photoUrl': photoUrl,
+          'photo_url': photoUrl,
         },
       );
+      final userData = await supabaseClient
+          .from('profiles')
+          .select()
+          .eq('id', response.user!.id);
       if (response.user == null) {
         throw const ServerException(message: 'User is null');
       }
-      return response.user!.id;
+      return UserModel.fromJson(userData.first);
     } catch (e) {
       throw ServerException(
         message: e.toString(),
