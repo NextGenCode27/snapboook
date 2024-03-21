@@ -8,6 +8,7 @@ import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
 import 'package:snapbook/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:snapbook/features/auth/presentation/views/login_view.dart';
 import 'package:snapbook/core/services/shared_pref.dart';
+import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
 import 'package:snapbook/features/home/presentation/views/home_view.dart';
 import 'package:snapbook/init_dependencies.dart';
 
@@ -22,6 +23,7 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<ThemeBloc>()),
         BlocProvider(create: (context) => serviceLocator<AppUserCubit>()),
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (context) => serviceLocator<HomeBloc>()),
       ],
       child: MyApp(isDarkMode: isDarkMode),
     ),
