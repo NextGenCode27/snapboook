@@ -33,6 +33,12 @@ class _HomeViewState extends State<HomeView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(HomeCurrentIndexEvent(currentIndex: 0));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
@@ -43,7 +49,11 @@ class _HomeViewState extends State<HomeView> {
       },
       builder: (context, state) {
         if (state is HomeLoading) {
-          return const Loader();
+          return const Scaffold(
+            body: Center(
+              child: Loader(),
+            ),
+          );
         }
 
         return Scaffold(

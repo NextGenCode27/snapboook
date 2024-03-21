@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
-  appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade300),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.grey.shade300,
+    elevation: 0,
+  ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.grey.shade300,
     elevation: 0,

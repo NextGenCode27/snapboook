@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData darkMode = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: Color.fromARGB(255, 20, 20, 20),
+    elevation: 0,
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: const Color.fromARGB(255, 20, 20, 20),
