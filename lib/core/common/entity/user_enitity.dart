@@ -4,8 +4,7 @@ abstract class UserEntity {
   final String email;
   final String phone;
   final String photoUrl;
-  final String photoId;
-  final DateTime updatedAt;
+  // final String photoId;
 
   UserEntity({
     required this.id,
@@ -13,7 +12,6 @@ abstract class UserEntity {
     required this.email,
     required this.phone,
     required this.photoUrl,
-    required this.photoId,
-    required this.updatedAt,
+    // required this.photoId,
   });
 }
