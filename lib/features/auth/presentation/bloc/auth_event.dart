@@ -35,3 +35,8 @@ final class AuthLoginEvent extends AuthEvent {
   @override
   String toString() => 'Auth Login Event';
 }
+
+final class AuthUserIsLoggedInEvent extends AuthEvent {
+  @override
+  String toString() => 'Auth User Logged In Event';
+}
