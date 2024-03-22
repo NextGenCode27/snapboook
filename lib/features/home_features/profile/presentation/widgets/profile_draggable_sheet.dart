@@ -11,13 +11,19 @@ class ProfileDraggableSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      expand: true,
-      initialChildSize: 0.4,
-      minChildSize: 0.4,
+      initialChildSize: 0.3,
+      minChildSize: 0.3,
       maxChildSize: 0.8,
+      shouldCloseOnMinExtent: true,
+      snap: true,
+      snapSizes: const [
+        0.3,
+        0.8,
+      ],
       builder: (context, scrollController) {
         return SingleChildScrollView(
           controller: scrollController,
+          physics: const ClampingScrollPhysics(),
           child: Container(
             padding: EdgeInsets.all(size.width / 30),
             decoration: BoxDecoration(
@@ -42,15 +48,17 @@ class ProfileDraggableSheet extends StatelessWidget {
                   height: 30,
                 ),
                 Container(
-                  height: size.height / 1.45,
+                  height: size.height,
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     children: [
                       Column(
                         children: [
-                          const Text(
-                            'Javed Pathan',
+                          Text(
+                            'Ayesha Pathan',
                             style: TextStyle(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 2.0,
@@ -82,9 +90,12 @@ class ProfileDraggableSheet extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              const Text(
+                              Text(
                                 '78',
                                 style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 2.0,
@@ -103,9 +114,12 @@ class ProfileDraggableSheet extends StatelessWidget {
                           ),
                           Column(
                             children: [
-                              const Text(
+                              Text(
                                 '138',
                                 style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 2.0,
@@ -124,9 +138,12 @@ class ProfileDraggableSheet extends StatelessWidget {
                           ),
                           Column(
                             children: [
-                              const Text(
+                              Text(
                                 '35',
                                 style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 2.0,

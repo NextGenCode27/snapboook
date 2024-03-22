@@ -7,24 +7,29 @@ import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
 import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
 import 'package:snapbook/features/home_features/profile/presentation/widgets/profile_draggable_sheet.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    bool isDarkMode = false;
+  State<ProfileView> createState() => _ProfileViewState();
+}
 
-    toggle() {
-      isDarkMode = !isDarkMode;
-      if (isDarkMode) {
-        context.read<ThemeBloc>().add(AppThemeChangeEvent(darkMode));
-        SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
-      } else if (!isDarkMode) {
-        context.read<ThemeBloc>().add(AppThemeChangeEvent(lightMode));
-        SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
-      }
+class _ProfileViewState extends State<ProfileView> {
+  bool isDarkMode = false;
+
+  toggle() {
+    isDarkMode = !isDarkMode;
+    if (isDarkMode) {
+      context.read<ThemeBloc>().add(AppThemeChangeEvent(darkMode));
+      SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
+    } else if (!isDarkMode) {
+      context.read<ThemeBloc>().add(AppThemeChangeEvent(lightMode));
+      SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -38,8 +43,14 @@ class ProfileView extends StatelessWidget {
                 return IconButton(
                   onPressed: toggle,
                   icon: state.themeData == lightMode
-                      ? const Icon(Icons.dark_mode)
-                      : const Icon(Icons.light_mode),
+                      ? Icon(
+                          Icons.dark_mode,
+                          color: Theme.of(context).colorScheme.secondary,
+                        )
+                      : Icon(
+                          Icons.light_mode,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                 );
               }
               return const SizedBox();
@@ -49,7 +60,8 @@ class ProfileView extends StatelessWidget {
             onPressed: () {
               context.read<HomeBloc>().add(HomeUserLogOutEvent());
             },
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout,
+                color: Theme.of(context).colorScheme.secondary),
           ),
         ],
       ),
@@ -59,7 +71,7 @@ class ProfileView extends StatelessWidget {
           color: Theme.of(context).colorScheme.error,
           image: const DecorationImage(
             image: NetworkImage(
-              'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+              'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1588&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             ),
             fit: BoxFit.cover,
           ),
