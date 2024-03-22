@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snapbook/core/common/cubit/cubit/app_user_cubit.dart';
 import 'package:snapbook/core/common/entity/user_enitity.dart';
 import 'package:snapbook/core/usecase/usecase.dart';
 import 'package:snapbook/features/auth/domain/usecase/current_user_usecase.dart';
@@ -15,13 +16,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUsecase _loginUsecase;
   final RegisterUsecase _registerUsecase;
   final CurrentUserUsecase _currentUserUsecase;
+  final AppUserCubit _appUserCubit;
   AuthBloc({
     required LoginUsecase loginUsecase,
     required RegisterUsecase registerUsecase,
     required CurrentUserUsecase currentUserUsecase,
+    required AppUserCubit appUserCubit,
   })  : _loginUsecase = loginUsecase,
         _registerUsecase = registerUsecase,
         _currentUserUsecase = currentUserUsecase,
+        _appUserCubit = appUserCubit,
         super(AuthInitial()) {
     on<AuthEvent>(_mapAuthEventToState);
     on<AuthRegisterEvent>(_mapAuthRegisterEventToState);
@@ -45,9 +49,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         photoUrl: event.photoUrl,
       ),
     );
+
     res.fold(
       (error) => emit(AuthFailed(message: error.message)),
-      (user) => emit(AuthSuccess(userEntity: user)),
+      (user) {
+        _appUserCubit.updateUser(user);
+        emit(AuthSuccess(userEntity: user));
+      },
     );
   }
 
@@ -61,7 +69,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     res.fold(
       (error) => emit(AuthFailed(message: error.message)),
-      (user) => emit(AuthSuccess(userEntity: user)),
+      (user) {
+        _appUserCubit.updateUser(user);
+        emit(AuthSuccess(userEntity: user));
+      },
     );
   }
 
@@ -71,7 +82,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     res.fold(
       (error) => emit(AuthFailed(message: error.message)),
-      (user) => emit(AuthSuccess(userEntity: user)),
+      (user) => (user) {
+        _appUserCubit.updateUser(user);
+        emit(AuthSuccess(userEntity: user));
+      },
     );
   }
 }
