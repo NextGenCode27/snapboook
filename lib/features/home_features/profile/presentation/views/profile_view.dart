@@ -7,24 +7,29 @@ import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
 import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
 import 'package:snapbook/features/home_features/profile/presentation/widgets/profile_draggable_sheet.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    bool isDarkMode = false;
+  State<ProfileView> createState() => _ProfileViewState();
+}
 
-    toggle() {
-      isDarkMode = !isDarkMode;
-      if (isDarkMode) {
-        context.read<ThemeBloc>().add(AppThemeChangeEvent(darkMode));
-        SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
-      } else if (!isDarkMode) {
-        context.read<ThemeBloc>().add(AppThemeChangeEvent(lightMode));
-        SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
-      }
+class _ProfileViewState extends State<ProfileView> {
+  bool isDarkMode = false;
+
+  toggle() {
+    isDarkMode = !isDarkMode;
+    if (isDarkMode) {
+      context.read<ThemeBloc>().add(AppThemeChangeEvent(darkMode));
+      SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
+    } else if (!isDarkMode) {
+      context.read<ThemeBloc>().add(AppThemeChangeEvent(lightMode));
+      SharedPref().setBool(key: 'isDarkMode', value: isDarkMode);
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,

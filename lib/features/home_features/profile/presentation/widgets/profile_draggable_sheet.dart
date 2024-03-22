@@ -11,13 +11,19 @@ class ProfileDraggableSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      expand: true,
       initialChildSize: 0.3,
       minChildSize: 0.3,
       maxChildSize: 0.8,
+      shouldCloseOnMinExtent: true,
+      snap: true,
+      snapSizes: const [
+        0.3,
+        0.8,
+      ],
       builder: (context, scrollController) {
         return SingleChildScrollView(
           controller: scrollController,
+          physics: const ClampingScrollPhysics(),
           child: Container(
             padding: EdgeInsets.all(size.width / 30),
             decoration: BoxDecoration(
@@ -42,7 +48,7 @@ class ProfileDraggableSheet extends StatelessWidget {
                   height: 30,
                 ),
                 Container(
-                  height: size.height / 1.45,
+                  height: size.height,
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     children: [
