@@ -3,11 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snapbook/core/themes/bloc/theme_bloc.dart';
 import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
 import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
+import 'package:snapbook/features/home_features/profile/presentation/views/edit_profile.dart';
 
 AppBar profileAppBar(BuildContext context, {required VoidCallback onPressed}) {
   return AppBar(
     backgroundColor: Colors.transparent,
     actions: [
+      IconButton(
+        onPressed: () {
+          Navigator.of(context).push(EditProfileView.route());
+        },
+        icon: const Icon(Icons.edit),
+      ),
       BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           if (state is ThemeSuccess) {

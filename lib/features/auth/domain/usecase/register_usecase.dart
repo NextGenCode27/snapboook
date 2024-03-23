@@ -15,6 +15,7 @@ class RegisterUsecase implements Usecase<UserEntity, RegisterParams> {
       password: params.password,
       phone: params.phone,
       photoUrl: params.photoUrl,
+      bio: params.bio,
     );
   }
 }
@@ -25,6 +26,7 @@ class RegisterParams {
   final String password;
   final String phone;
   final String photoUrl;
+  final String bio;
 
   RegisterParams({
     required this.userName,
@@ -32,5 +34,8 @@ class RegisterParams {
     required this.password,
     required this.phone,
     required this.photoUrl,
+    required this.bio,
+    // required this.followers,
+    // required this.following,
   });
 }

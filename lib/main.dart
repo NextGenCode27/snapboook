@@ -10,6 +10,7 @@ import 'package:snapbook/features/auth/presentation/views/login_view.dart';
 import 'package:snapbook/core/services/shared_pref.dart';
 import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
 import 'package:snapbook/features/home/presentation/views/home_view.dart';
+import 'package:snapbook/features/home_features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:snapbook/init_dependencies.dart';
 
 void main() async {
@@ -24,6 +25,7 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<AppUserCubit>()),
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (context) => serviceLocator<HomeBloc>()),
+        BlocProvider(create: (context) => serviceLocator<ProfileBloc>()),
       ],
       child: MyApp(isDarkMode: isDarkMode),
     ),
@@ -65,7 +67,6 @@ class _MyAppState extends State<MyApp> {
             darkTheme: darkMode,
             home: BlocSelector<AppUserCubit, AppUserState, bool>(
               selector: (state) {
-                print(state);
                 return state is AppUserLoggedIn;
               },
               builder: (context, state) {

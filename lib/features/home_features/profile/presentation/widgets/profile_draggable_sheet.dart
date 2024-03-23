@@ -75,7 +75,7 @@ class ProfileDraggableSheet extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Text(
-                                  'We used bloc clean architecture in this project. We are not foccussing on ui thats why we are using very minimal ui design.',
+                                  user.bio,
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   maxLines: 4,

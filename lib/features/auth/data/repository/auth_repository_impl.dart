@@ -16,6 +16,9 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
     required String phone,
     required String photoUrl,
+    required String bio,
+    // required List<String> followers,
+    // required List<String> following,
   }) async {
     try {
       final user = await authRemoteDatasource.signUp(
@@ -24,6 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
         phone: phone,
         password: password,
         photoUrl: photoUrl,
+        bio: bio,
       );
       return right(user);
     } on AuthException catch (e) {

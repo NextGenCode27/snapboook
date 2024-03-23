@@ -1,4 +1,4 @@
-import 'package:snapbook/core/common/models/user_model.dart';
+import 'package:snapbook/features/auth/data/models/user_model.dart';
 import 'package:snapbook/core/error/exception.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,6 +14,7 @@ abstract interface class AuthRemoteDatasource {
     required String phone,
     required String password,
     required String photoUrl,
+    required String bio,
   });
 
   Future<UserModel?> getCurrentUserData();
@@ -76,6 +77,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     required String phone,
     required String password,
     required String photoUrl,
+    required String bio,
   }) async {
     try {
       final response = await supabaseClient.auth.signUp(
@@ -85,6 +87,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
           'name': userName,
           'phone': phone,
           'photo_url': photoUrl,
+          'bio': bio,
         },
       );
       final userData = await supabaseClient
