@@ -60,6 +60,7 @@ void _initAuth() {
         loginUsecase: serviceLocator(),
         registerUsecase: serviceLocator(),
         currentUserUsecase: serviceLocator(),
+        appUserCubit: serviceLocator(),
       ),
     );
 }

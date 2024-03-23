@@ -4,7 +4,7 @@ import 'package:snapbook/core/services/shared_pref.dart';
 import 'package:snapbook/core/themes/bloc/theme_bloc.dart';
 import 'package:snapbook/core/themes/theme_mode/dark_mode.dart';
 import 'package:snapbook/core/themes/theme_mode/light_mode.dart';
-import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
+import 'package:snapbook/features/home_features/profile/presentation/widgets/profile_appbar.dart';
 import 'package:snapbook/features/home_features/profile/presentation/widgets/profile_draggable_sheet.dart';
 
 class ProfileView extends StatefulWidget {
@@ -34,37 +34,7 @@ class _ProfileViewState extends State<ProfileView> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        actions: [
-          BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (context, state) {
-              if (state is ThemeSuccess) {
-                return IconButton(
-                  onPressed: toggle,
-                  icon: state.themeData == lightMode
-                      ? Icon(
-                          Icons.dark_mode,
-                          color: Theme.of(context).colorScheme.secondary,
-                        )
-                      : Icon(
-                          Icons.light_mode,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                );
-              }
-              return const SizedBox();
-            },
-          ),
-          IconButton(
-            onPressed: () {
-              context.read<HomeBloc>().add(HomeUserLogOutEvent());
-            },
-            icon: Icon(Icons.logout,
-                color: Theme.of(context).colorScheme.secondary),
-          ),
-        ],
-      ),
+      appBar: profileAppBar(context, onPressed: toggle),
       body: Container(
         height: size.height / 1,
         decoration: BoxDecoration(

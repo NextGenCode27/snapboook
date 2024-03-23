@@ -65,6 +65,7 @@ class _MyAppState extends State<MyApp> {
             darkTheme: darkMode,
             home: BlocSelector<AppUserCubit, AppUserState, bool>(
               selector: (state) {
+                print(state);
                 return state is AppUserLoggedIn;
               },
               builder: (context, state) {
