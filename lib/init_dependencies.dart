@@ -14,6 +14,11 @@ import 'package:snapbook/features/home/data/repository/home_repository_impl.dart
 import 'package:snapbook/features/home/domain/repository/home_repository.dart';
 import 'package:snapbook/features/home/domain/usecase/home_user_logout_usecase.dart';
 import 'package:snapbook/features/home/presentation/bloc/home_bloc.dart';
+import 'package:snapbook/features/home_features/profile/data/data_source/remote/profile_remote_datasource.dart';
+import 'package:snapbook/features/home_features/profile/data/repository/profile_repository_impl.dart';
+import 'package:snapbook/features/home_features/profile/domain/repository/profile_repository.dart';
+import 'package:snapbook/features/home_features/profile/domain/usecase/upload_bio_usecase.dart';
+import 'package:snapbook/features/home_features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 GetIt serviceLocator = GetIt.instance;
@@ -22,6 +27,7 @@ Future<void> initDependencies() async {
   _intiTheme();
   _initAuth();
   _initHome();
+  _initProfile();
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supabaseAnnonKey,
@@ -80,5 +86,21 @@ void _initHome() {
       () => HomeBloc(
         homeUserLogoutUsecase: serviceLocator(),
       ),
+    );
+}
+
+void _initProfile() {
+  serviceLocator
+    ..registerFactory<ProfileRemoteDataSource>(
+      () => ProfileRemoteDataSourceImpl(serviceLocator()),
+    )
+    ..registerFactory<ProfileRepository>(
+      () => ProfileRepositoryImpl(serviceLocator()),
+    )
+    ..registerFactory<UploadBioUsecase>(
+      () => UploadBioUsecase(serviceLocator()),
+    )
+    ..registerLazySingleton<ProfileBloc>(
+      () => ProfileBloc(uploadBioUsecase: serviceLocator()),
     );
 }
