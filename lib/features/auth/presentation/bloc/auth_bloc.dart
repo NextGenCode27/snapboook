@@ -82,7 +82,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     res.fold(
       (error) => emit(AuthFailed(message: error.message)),
-      (user) => (user) {
+      (user) {
         _appUserCubit.updateUser(user);
         emit(AuthSuccess(userEntity: user));
       },
